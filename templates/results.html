@@ -1,0 +1,12 @@
+<h2> Score: {{ score }} / {{ total }} </h2>
+{% for r in results %}
+    <div style = "margin-bottom: 10px;">
+        <strong>Q{{ r.index }}: {{ r.question }}</strong><br>
+        {% if r.result %}
+            Correct! {{ r.explanation }}
+        {% else %}
+            Incorrect. The correct answer is: {{ r.correct_answer }}. {{ r.explanation }}<br>
+            You chose: {{ r.user_ans }}
+        {% endif %}
+    </div>
+{% endfor %}
