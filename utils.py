@@ -15,21 +15,17 @@ pinecone_index_host = os.getenv("PINECONE_INDEX_HOST")
 # Initialize clients
 pc = Pinecone(api_key=pinecone_api_key)
 
-# --- Core Functions ---
 
 def extract_text(pdf_path):
-    """Extracts full text from a PDF file."""
-    with open(pdf_path, "rb") as f:
+    ]    with open(pdf_path, "rb") as f:
         reader = PyPDF2.PdfReader(f)
         full_text = "".join(page.extract_text() for page in reader.pages if page.extract_text())
     return full_text
 
 def chunk_text(text, chunk_size=1000):
-    """Splits text into overlapping or fixed-size chunks."""
     return [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
 
 def embed_text(text):
-    """Generates a single embedding using OpenAI."""
     client = openai.OpenAI(api_key=openai_api_key)
     response = client.embeddings.create(
         input=text,
@@ -38,7 +34,6 @@ def embed_text(text):
     return response.data[0].embedding
 
 def store_embeddings(chunks, namespace):
-    """Stores embedded chunks into Pinecone under a specific namespace."""
     index = pc.Index(host=pinecone_index_host)
     vectors = [
         {
@@ -52,7 +47,6 @@ def store_embeddings(chunks, namespace):
     index.close()
 
 def generate_qa(context, num_questions=2):
-    """Uses GPT-4 to generate MCQs based on input context."""
     client = openai.OpenAI(api_key=openai_api_key)
     prompt = (
         f"Based on the following document content, generate {num_questions} "
@@ -80,7 +74,6 @@ def generate_qa(context, num_questions=2):
     return response.choices[0].message.content
 
 def parse_mcqs(raw_text):
-    """Parses raw GPT output into structured question format."""
     pattern = (
         r"Q\d+\.\s*(.*?)\n"
         r"A\.\s*(.*?)\n"
