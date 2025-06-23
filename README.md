@@ -54,3 +54,4 @@ Alternatively, you can access it through this link: http://quizmaker-env.eba-3pd
 ## Future Development
 - Finish the retry mechanism for the code
 - Provide UI for the user specify the number of questions and the chunking size
+- Convert to Chrome extension and forgo pdf upload
