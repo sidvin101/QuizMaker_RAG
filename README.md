@@ -52,5 +52,5 @@ Alternatively, you can access it through this link: http://quizmaker-env.eba-3pd
 - There is a possibility for incorrect answers 
 
 ## Future Development
-- Finish the retry for the code
+- Finish the retry mechanism for the code
 - Provide UI for the user specify the number of questions and the chunking size
